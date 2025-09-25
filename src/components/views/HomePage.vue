@@ -1,81 +1,73 @@
 <template>
 
-  <div class="page-container">
-
-    <div class="scroll-content">
-
-      <div class="text-l font-bold ml-5  mt-3 text-[#DD0186]">
-        <h1>News and Announcements</h1>
-      </div>
-
-      <!-- <van-search v-model="value" background="#f999de" placeholder="Placeholder" /> -->
-
-      <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-        <van-swipe-item>CAT 1</van-swipe-item>
-        <van-swipe-item>CAT 2</van-swipe-item>
-        <van-swipe-item>CAT 3</van-swipe-item>
-        <van-swipe-item>CAT 4</van-swipe-item>
-      </van-swipe>
-
-      <div class="text-l font-bold mt-3 mb-3 text-[#FE47D0]">
-        <van-divider 
-          content-position="left"
-          :style="{ color: '#DD0186', borderColor: '#DD0186', padding: '0 16px' }"
-        >
-          News
-        </van-divider>
-      </div>
-
-      <van-card
-        class="m-3 mt-3 custom-card"
-        title="First News"
-        desc="Description of the news"
-        thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
-      />
-      <van-card
-        class="m-3 mt-3 custom-card"
-        title="Second News"
-        desc="Description of the news"
-        thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
-      />
-      <van-card
-        class="m-3 mt-3 custom-card"
-        title="Third News"
-        desc="Description of the news"
-        thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
-      />
-
-      <div class="text-l font-bold mt-3 mb-3 text-[#FE47D0]">
-        <van-divider 
-          content-position="left"
-          :style="{ color: '#DD0186', borderColor: '#DD0186', padding: '0 16px' }"
-        >
-          Announcements
-        </van-divider>
-      </div>
-
-      <van-card
-        class="m-3 mt-3 custom-card"
-        title="First Announcements"
-        desc="Description of the Announcements"
-        thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
-      />
-      <van-card
-        class="m-3 mt-3 custom-card"
-        title="Second Announcements"
-        desc="Description of the Announcements"
-        thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
-      />
-      <van-card
-        class="m-3 mt-3 custom-card"
-        title="Third Announcements"
-        desc="Description of the Announcements"
-        thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
-      />
-      
-    </div>
-
+  <div class="text-l font-bold ml-5  mt-3 text-[#DD0186]">
+    <h1>News and Announcements</h1>
   </div>
+
+  <!-- <van-search v-model="value" background="#f999de" placeholder="Placeholder" /> -->
+
+  <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+    <van-swipe-item>CAT 1</van-swipe-item>
+    <van-swipe-item>CAT 2</van-swipe-item>
+    <van-swipe-item>CAT 3</van-swipe-item>
+    <van-swipe-item>CAT 4</van-swipe-item>
+  </van-swipe>
+
+  <div class="text-l font-bold mt-3 mb-3 text-[#FE47D0]">
+    <van-divider 
+      content-position="left"
+      :style="{ color: '#DD0186', borderColor: '#DD0186', padding: '0 16px' }"
+    >
+      News
+    </van-divider>
+  </div>
+
+  <van-card
+    class="m-3 mt-3 custom-card"
+    title="First News"
+    desc="Description of the news"
+    thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+  />
+  <van-card
+    class="m-3 mt-3 custom-card"
+    title="Second News"
+    desc="Description of the news"
+    thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+  />
+  <van-card
+    class="m-3 mt-3 custom-card"
+    title="Third News"
+    desc="Description of the news"
+    thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+  />
+
+  <div class="text-l font-bold mt-3 text-[#FE47D0]">
+    <van-divider 
+      content-position="left"
+      :style="{ color: '#DD0186', borderColor: '#DD0186', padding: '0 16px' }"
+    >
+      Announcements
+    </van-divider>
+  </div>
+
+  <van-card
+    class="m-3 mt-3 custom-card"
+    title="First Announcements"
+    desc="Description of the Announcements"
+    thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+  />
+  <van-card
+    class="m-3 mt-3 custom-card"
+    title="Second Announcements"
+    desc="Description of the Announcements"
+    thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+  />
+  <van-card
+    class="m-3 mt-3 mb-10 custom-card"
+    title="Third Announcements"
+    desc="Description of the Announcements"
+    thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+  />
 
 </template>
 
@@ -89,19 +81,11 @@ const value = ref('')
 
 <style>
 
-  /* container หลักเต็มหน้าจอ */
-  .page-container {
-    position: relative;
-    height: 100vh; /* เต็มหน้าจอ */
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* ส่วน scrollable */
-  .scroll-content {
-    flex: 1;
-    overflow-y: auto;
-    padding-bottom: 60px; /* เว้นช่องให้ Tabbar ไม่บัง */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto; /* ใช้ body scroll */
   }
 
   .my-swipe .van-swipe-item {
