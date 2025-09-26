@@ -70,27 +70,19 @@
 
 
 <script lang="ts" setup>
-import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { Locale } from 'vant';
 import { useRoute } from 'vue-router'
+import { useWindowSize } from '@vueuse/core'
 import thTH from 'vant/es/locale/lang/th-TH';
 
 Locale.use('th-TH', thTH);
 
 const active = ref('home')
-const isLargeScreen = ref(window.innerWidth > 768)
 
-function handleResize() {
-  isLargeScreen.value = window.innerWidth > 768
-}
-
-onMounted(() => {
-  window.addEventListener('resize', handleResize)
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', handleResize)
-})
+// ใช้ VueUse 
+const { width } = useWindowSize()
+const isLargeScreen = computed(() => width.value > 768)
 
 // ตรวจสอบ path ปัจจุบัน 
 const route = useRoute()
