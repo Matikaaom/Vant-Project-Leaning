@@ -5,6 +5,17 @@
     <div class="text-l text-center font-bold mt-3 mb-3 text-[#DD0186]">
         <h1>User Details</h1>
     </div>
+
+    <div class="flex justify-center mb-3">
+        <van-rate 
+            v-model="value" 
+            icon="like" 
+            void-icon="like-o" 
+            class="m-5"
+            :count="6"
+            :style="{ '--van-rate-icon-size': '40px' }"
+        />
+    </div>
     
     <van-cell-group inset >
         <van-field
@@ -38,15 +49,33 @@
 
 <script lang="ts" setup>
 
-import { ref } from 'vue'
-import { useRoute } from 'vue-router'
+    import { ref, onMounted } from 'vue'
+    import { useRoute } from 'vue-router'
 
     const route = useRoute()
 
-    const firstname = ref((route.query.firstname as string) || '')
-    const lastname = ref((route.query.lastname as string) || '')
-    const password = ref((route.query.password as string) || '')
-    const date = ref((route.query.date as string) || '')
+    const firstname = ref('')
+    const lastname = ref('')
+    const password = ref('')
+    const date = ref('')
+
+    const value = ref(3);
+
+    onMounted(() => {
+    // ถ้ามี query มากับ route → เก็บลง localStorage
+    if (route.query.firstname) {
+            localStorage.setItem('firstname', route.query.firstname as string)
+            localStorage.setItem('lastname', route.query.lastname as string)
+            localStorage.setItem('password', route.query.password as string)
+            localStorage.setItem('date', route.query.date as string)
+        }
+
+        // ดึงจาก localStorage มาแสดง
+        firstname.value = localStorage.getItem('firstname') || ''
+        lastname.value = localStorage.getItem('lastname') || ''
+        password.value = localStorage.getItem('password') || ''
+        date.value = localStorage.getItem('date') || ''
+    })
 
 </script>
 

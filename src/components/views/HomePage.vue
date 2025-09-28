@@ -1,6 +1,6 @@
 <template>
 
-  <div class="text-l font-bold ml-5  mt-3 text-[#DD0186]">
+  <div class="text-l font-bold ml-5 mt-3 text-[#DD0186]">
     <h1>News and Announcements</h1>
   </div>
 
