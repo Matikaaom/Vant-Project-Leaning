@@ -26,7 +26,7 @@
       <!-- Sidebar -->
       <transition name="slide">
         <div v-show="isSidebarOpen" class="sidebar">
-          <van-sidebar v-model="active" :style="{ '--van-sidebar-width': '200px', '--van-sidebar-selected-border-color': '#FE26C7' }">
+          <van-sidebar v-model="active" :style="{ '--van-sidebar-width': '300px', '--van-sidebar-selected-border-color': '#FE26C7' }">
             <van-sidebar-item
               title="Home"
               to="/home"
