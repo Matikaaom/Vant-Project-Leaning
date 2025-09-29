@@ -10,7 +10,7 @@
       >
         <template #left>
           <!-- ปุ่ม burger -->
-          <div class="burger-btn" v-if="isLargeScreen" @click="toggleSidebar">☰</div>
+          <div class="burger-btn" v-if="isLargeScreen && showSidebarOrTabbar" @click="toggleSidebar">☰</div>
         </template>
       </van-nav-bar>
 
