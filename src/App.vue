@@ -3,6 +3,7 @@
 
     <!-- Header -->
     <div class="header">
+      <van-overlay :show="isSidebarOpen"  :style="{ backgroundColor: 'transparent' }"  @click="toggleSidebar"/>
       <!-- NavBar -->
       <van-nav-bar 
         title="STARCAT ★" 
@@ -15,10 +16,10 @@
       </van-nav-bar>
 
       <!-- Notice Bar -->
-      <van-notice-bar
+      <!-- <van-notice-bar
         text="luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma"
         left-icon="volume-o"
-      />
+      /> -->
     </div>
 
     <!-- Desktop layout -->
@@ -26,7 +27,7 @@
       <!-- Sidebar -->
       <transition name="slide">
         <div v-show="isSidebarOpen" class="sidebar">
-          <van-sidebar v-model="active" :style="{ '--van-sidebar-width': '300px', '--van-sidebar-selected-border-color': '#FE26C7' }">
+          <van-sidebar v-model="active" :style="{ '--van-sidebar-width': '300px', '--van-sidebar-selected-border-color': '#FE26C7', '--van-sidebar-selected-border-height': '60px' }">
             <van-sidebar-item
               title="Home"
               to="/home"
@@ -48,17 +49,21 @@
               :style="{ backgroundColor: '#FFCFF2', color: '#FE26C7' }"
             />
           </van-sidebar>
+          <div class="overlay" @click="toggleSidebar"></div>
         </div>
       </transition>
 
       <!-- Main content -->
-      <div class="main-content scroll-content">
+      <div 
+        class="main-content" 
+        :class="{ 'content-shifted-desktop': isSidebarOpen }"
+      >
         <router-view />
       </div>
     </div>
 
     <!-- Mobile layout -->
-    <div v-else class="main-content scroll-content">
+    <div v-else class="main-content">
       <router-view />
     </div>
 
@@ -82,20 +87,20 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
-import { Locale } from 'vant'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useWindowSize } from '@vueuse/core'
-import thTH from 'vant/es/locale/lang/th-TH'
 
-Locale.use('th-TH', thTH)
+
+const router = useRouter()
 
 const active = ref('home')
-const isSidebarOpen = ref(true) // เริ่มแรกเปิดไว้
+const isSidebarOpen = ref(false) // เริ่มแรกปิดไว้
 
 // toggle sidebar
 function toggleSidebar() {
   isSidebarOpen.value = !isSidebarOpen.value
 }
+
 
 // ใช้ VueUse 
 const { width } = useWindowSize()
@@ -107,11 +112,12 @@ const showSidebarOrTabbar = computed(() => route.path !== '/')
 </script>
 
 <style>
+/* Global styles (Unchanged) */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* ปิด scroll ของ body */
+  overflow: hidden; 
   background-color: #faedf5;
 }
 
@@ -121,12 +127,11 @@ html, body {
   flex-direction: column;
 }
 
-/* Header (Nav + Notice) */
 .header {
-  flex-shrink: 0; /* ไม่ให้ถูกบีบ */
+  flex-shrink: 0;
 }
 
-/* Layout flex sidebar */
+/* Desktop Layout (Flexbox) */
 .layout {
   flex: 1;
   display: flex;
@@ -135,19 +140,29 @@ html, body {
 }
 
 .sidebar {
-  display: flex;
-  background-color: #FFCFF2;
+  position: fixed; /* ใช้ fixed กลับมาเพื่อให้ slide transition ทำงานง่าย */
   height: 100%; 
+  background-color: #FFCFF2;
+  z-index: 1000;
+  width: 300px;
 }
 
+/* Main Content (Flex Item) */
 .main-content {
-  flex: 1;
-  min-height: 0; /* ป้องกัน scroll พัง */
+  flex-grow: 1;
+  margin-bottom: 60px; /* เผื่อที่ให้ Tabbar */
   overflow-y: auto; 
-  padding-bottom: 20px; 
+  /* KEY FIX: เพิ่ม width ใน transition เพื่อให้การขยับ smooth ทั้ง margin และ width */
+  transition: margin-left 0.3s ease, width 0.3s ease; 
 }
 
-/* Burger button */
+/* เมื่อ Sidebar เปิดอยู่ (ทำให้ Main Content ขยับ) */
+.content-shifted-desktop {
+  margin-left: 300px;
+  width: calc(100% - 300px); /* ป้องกันการล้นจอ */
+}
+
+/* Burger button (Unchanged) */
 .burger-btn {
   font-size: 22px;
   cursor: pointer;
@@ -156,7 +171,7 @@ html, body {
   user-select: none;
 }
 
-/* Slide transition */
+/* Slide transition (สำหรับแอนิเมชันของ Sidebar) */
 .slide-enter-active, .slide-leave-active {
   transition: transform 0.3s ease;
 }
@@ -164,7 +179,7 @@ html, body {
   transform: translateX(-100%);
 }
 
-/* Custom Vant */
+/* Custom Vant (Unchanged) */
 .van-nav-bar__title {
   color: #FE47D0 !important;
   font-weight: bold;
