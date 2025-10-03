@@ -1,6 +1,72 @@
 <template>
 
     <van-tabs v-model:active="activeName" color="#FE47D0" background="#FFCFF2" title-active-color="#FE26C7">
+        <van-tab title="Log In" name="login">
+            <img src="@/assets/StarCatLOGO.png" alt="Logo" class="w-30 h-30 mx-auto mt-5"/>
+            <div class="text-l text-center font-bold mt-3 mb-3 text-[#FE47D0]">
+                <h1>Log In to Journey</h1>
+            </div>
+            <van-form @submit="onSubmit">
+                <van-cell-group inset>
+                    <!-- <van-field
+                        v-model="firstname"
+                        name="firstname"
+                        label="Firstname"
+                        placeholder="Firstname"
+                        class="custom-field"
+                        :rules="[{ required: true, message: 'Firstname is required' }]"
+                    />
+                    <van-field
+                        v-model="lastname"
+                        name="lastname"
+                        label="Lastname"
+                        placeholder="Lastname"
+                        :rules="[{ required: true, message: 'Lastname is required' }]"
+                    /> -->
+                    <van-field
+                        v-model="username"
+                        type="text"
+                        name="username"
+                        label="Username"
+                        placeholder="Username"
+                        :rules="[{ required: true, message: 'Username is required' }]"
+                    />
+                    <van-field
+                        v-model="password"
+                        type="password"
+                        name="password"
+                        label="Password"
+                        placeholder="Password"
+                        :rules="[{ required: true, message: 'Password is required' }]"
+                    />
+                    <!-- <van-field
+                        v-model="date"
+                        name="date"
+                        label="Date"
+                        placeholder="Select Date Range"
+                        readonly 
+                        clickable
+                        is-link
+                        :rules="[{ required: true, message: 'Date is required' }]"
+                        @click="show = true"
+                    />
+                    <van-calendar
+                        v-model:show="show"
+                        type="range"
+                        color="#FE47D0"
+                        @confirm="onConfirm"
+                    /> -->
+
+                </van-cell-group>
+
+                <div style="margin: 16px; ">
+                <van-button color="#FE47D0" round block type="primary" native-type="submit">
+                    Log In
+                </van-button>
+                </div>
+            </van-form>
+        </van-tab>
+
         <van-tab title="Sign Up" name="signup">
             <img src="@/assets/StarCatLOGO.png" alt="Logo" class="w-30 h-30 mx-auto mt-5"/>
             <div class="text-l text-center font-bold mt-3 mb-3 text-[#FE47D0]">
@@ -58,63 +124,7 @@
                 </div>
             </van-form>
         </van-tab>
-        <van-tab title="Log In" name="login">
-            <img src="@/assets/StarCatLOGO.png" alt="Logo" class="w-30 h-30 mx-auto mt-5"/>
-            <div class="text-l text-center font-bold mt-3 mb-3 text-[#FE47D0]">
-                <h1>Log In to Journey</h1>
-            </div>
-            <van-form @submit="onSubmit">
-                <van-cell-group inset>
-                    <van-field
-                        v-model="firstname"
-                        name="firstname"
-                        label="Firstname"
-                        placeholder="Firstname"
-                        class="custom-field"
-                        :rules="[{ required: true, message: 'Firstname is required' }]"
-                    />
-                    <van-field
-                        v-model="lastname"
-                        name="lastname"
-                        label="Lastname"
-                        placeholder="Lastname"
-                        :rules="[{ required: true, message: 'Lastname is required' }]"
-                    />
-                    <van-field
-                        v-model="password"
-                        type="password"
-                        name="password"
-                        label="Password"
-                        placeholder="Password"
-                        :rules="[{ required: true, message: 'Password is required' }]"
-                    />
-                <van-field
-                        v-model="date"
-                        name="date"
-                        label="Date"
-                        placeholder="Select Date Range"
-                        readonly 
-                        clickable
-                        is-link
-                        :rules="[{ required: true, message: 'Date is required' }]"
-                        @click="show = true"
-                    />
-                    <van-calendar
-                        v-model:show="show"
-                        type="range"
-                        color="#FE47D0"
-                        @confirm="onConfirm"
-                    />
-
-                </van-cell-group>
-
-                <div style="margin: 16px; ">
-                <van-button color="#FE47D0" round block type="primary" native-type="submit">
-                    Log In
-                </van-button>
-                </div>
-            </van-form>
-        </van-tab>
+      
     </van-tabs>
 
 </template>
@@ -128,7 +138,9 @@ import { useRouter } from 'vue-router'
 
     const router = useRouter()
 
-    const activeName = ref('signup');
+    const activeName = ref('login');
+
+    const username = ref('');
 
     const firstname = ref('');
     const lastname = ref('');
@@ -146,10 +158,11 @@ import { useRouter } from 'vue-router'
 
     const onSubmit = () => {
         const formData = {
-            firstname: firstname.value,
-            lastname: lastname.value,
+            // firstname: firstname.value,
+            // lastname: lastname.value,
+            username: username.value,
             password: password.value,
-            date: date.value
+            // date: date.value
         }
 
         console.log('submit', formData)

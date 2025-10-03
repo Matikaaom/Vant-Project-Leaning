@@ -1,5 +1,11 @@
 <template>
 
+    <!-- Notice Bar -->
+    <van-notice-bar
+      text="luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma"
+      left-icon="volume-o"
+    />
+
     <div class="text-l font-bold ml-5 mt-3 mb-3 text-[#DD0186]">
         <h1>Progress Steps</h1>
     </div>
