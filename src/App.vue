@@ -49,7 +49,6 @@
               :style="{ backgroundColor: '#FFCFF2', color: '#FE26C7' }"
             />
           </van-sidebar>
-          <div class="overlay" @click="toggleSidebar"></div>
         </div>
       </transition>
 
@@ -115,8 +114,6 @@ const showSidebarOrTabbar = computed(() => route.path !== '/')
 /* Global styles (Unchanged) */
 html, body {
   height: 100%;
-  margin: 0;
-  padding: 0;
   overflow: hidden; 
   background-color: #faedf5;
 }
