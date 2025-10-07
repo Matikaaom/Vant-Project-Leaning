@@ -57,7 +57,14 @@
             disabled
         /> -->
     </van-cell-group>
-        <div class="mt-4 px-4">
+
+    <div class="p-4">
+        <van-grid :column-num="3">
+            <van-grid-item v-for="value in 6" :key="value" icon="photo-o" text="Text" />
+        </van-grid>
+    </div>
+
+        <div class="px-4">
             <van-row justify="center">
                 <van-button color="#FF5BC6" size="normal" @click="logout">Logout</van-button>
             </van-row>
