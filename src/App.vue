@@ -110,6 +110,7 @@ const isLargeScreen = computed(() => width.value > 768)
 // ตรวจสอบ path ปัจจุบัน 
 const route = useRoute()
 const showSidebarOrTabbar = computed(() => route.path !== '/')
+
 </script>
 
 <style>

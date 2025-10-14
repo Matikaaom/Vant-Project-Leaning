@@ -27,3 +27,5 @@ npm run dev
 ```sh
 npm run build
 ```
+
+LIFF_ID=2008284940-aZ5dYpXy
