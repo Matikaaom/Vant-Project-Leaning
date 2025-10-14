@@ -131,9 +131,25 @@
 
 <script lang="ts" setup>
 
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 import { useRouter } from 'vue-router'
+import liff from '@line/liff';
+
+const main = async () => {
+ 
+
+  if (!liff.isLoggedIn()) {
+    // ถ้ายังไม่ล็อกอิน ให้ login
+    liff.login();
+  } else {
+    // ถ้าล็อกอินแล้ว ไปหน้า Home เลย
+    router.push({ name: 'home' });
+  }
+}
+ onMounted(() => {
+  main();
+});
 
 
     const router = useRouter()
@@ -176,6 +192,6 @@ import { useRouter } from 'vue-router'
 
 </script>
 
-<style scoped>
-
+<style>
 </style>
+
