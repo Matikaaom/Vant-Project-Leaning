@@ -11,7 +11,9 @@
       >
         <template #left>
           <!-- ปุ่ม burger -->
-          <div class="burger-btn" v-if="isLargeScreen && showSidebarOrTabbar" @click="toggleSidebar">☰</div>
+          <div class="burger-btn" v-if="isLargeScreen && showSidebarOrTabbar" @click="toggleSidebar" >
+            <van-icon color="#FE26C7" name="wap-nav" />
+          </div>
         </template>
       </van-nav-bar>
 
@@ -78,7 +80,7 @@
       <van-tabbar-item to="/home" name="home" icon="home-o">Home</van-tabbar-item>
       <van-tabbar-item to="/steps" name="steps" icon="todo-list-o">Progress Steps</van-tabbar-item>
       <van-tabbar-item to="/dashboard" name="dashboard" icon="chart-trending-o">Dashboard</van-tabbar-item>
-      <van-tabbar-item to="/user" name="user" icon="user-o">User Details</van-tabbar-item>
+      <van-tabbar-item to="/user" name="user" icon="user-o" badge="2">User Details</van-tabbar-item>
     </van-tabbar>
 
   </div>
@@ -163,7 +165,6 @@ html, body {
 .burger-btn {
   font-size: 22px;
   cursor: pointer;
-  color: #FE26C7;
   padding: 0 10px;
   user-select: none;
 }
