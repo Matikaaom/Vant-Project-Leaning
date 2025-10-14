@@ -32,7 +32,7 @@
           <van-sidebar v-model="active" :style="{ '--van-sidebar-width': '300px', '--van-sidebar-selected-border-color': '#FE26C7', '--van-sidebar-selected-border-height': '60px' }">
             <van-sidebar-item
               title="Home"
-              to="/home"
+              to="/"
               :style="{ backgroundColor: '#FFCFF2', color: '#FE26C7' }"
             />
             <van-sidebar-item
