@@ -157,7 +157,8 @@
     import { ref, onMounted, computed } from 'vue'
     import { showConfirmDialog, showNotify } from 'vant'
     import { useRoute, useRouter } from 'vue-router'
-import { color } from 'echarts'
+    import liff from '@line/liff'
+    import { color } from 'echarts'
 
     const router = useRouter()
 
@@ -235,14 +236,16 @@ import { color } from 'echarts'
     }
 
     // Logout dialog
-    const logout = () => {
+    const logout = async() => {
         showConfirmDialog({
             title: ' LOGOUT ',
             message: 'Are you sure you want to logout?', 
         })
         .then(() => {
-            router.push('/') 
-            console.log('user logged out')
+            liff.logout()
+            window.location.reload()
+            // router.push('/') 
+            // console.log('user logged out')
         })
         .catch(() => {
             console.log('user cancel logout')
