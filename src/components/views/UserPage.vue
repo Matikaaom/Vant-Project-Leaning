@@ -236,7 +236,7 @@
     }
 
     // Logout dialog
-    const logout = async() => {
+    const logout = () => {
         showConfirmDialog({
             title: ' LOGOUT ',
             message: 'Are you sure you want to logout?', 
