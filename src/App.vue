@@ -77,7 +77,7 @@
       inactive-color="#FE47D0"
       route
     >
-      <van-tabbar-item to="/home" name="home" icon="home-o">Home</van-tabbar-item>
+      <van-tabbar-item to="/" name="home" icon="home-o">Home</van-tabbar-item>
       <van-tabbar-item to="/steps" name="steps" icon="todo-list-o">Progress Steps</van-tabbar-item>
       <van-tabbar-item to="/dashboard" name="dashboard" icon="chart-trending-o">Dashboard</van-tabbar-item>
       <van-tabbar-item to="/user" name="user" icon="user-o" badge="2">User Details</van-tabbar-item>
