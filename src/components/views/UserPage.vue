@@ -244,6 +244,8 @@
         .then(() => {
             liff.logout()
             liff.login()
+            // window.location.reload()
+            // router.push('/') 
             // console.log('user logged out')
         })
         .catch(() => {
