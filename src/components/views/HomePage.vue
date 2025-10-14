@@ -28,27 +28,26 @@
     </van-divider>
   </div>
 
-  <van-card
-    class="m-3 mt-3 custom-card"
-    title="First News"
-    desc="Description of the news"
-    thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg" 
-    :style="{ 'background-color': '#f999de' }"
-  />
-  <van-card
-    class="m-3 mt-3 custom-card"
-    title="Second News"
-    desc="Description of the news"
-    thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
-    :style="{ 'background-color': '#f999de' }"
-  />
-  <van-card
-    class="m-3 mt-3 custom-card"
-    title="Third News"
-    desc="Description of the news"
-    thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
-    :style="{ 'background-color': '#f999de' }"
-  />
+  <div class="m-3 mt-3 custom-card">
+    <van-card   
+      title="First News"
+      desc="Description of the news"
+      thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg" 
+      :style="{ 'background-color': '#f999de' }"
+    />
+    <van-card
+      title="Second News"
+      desc="Description of the news"
+      thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+      :style="{ 'background-color': '#f999de' }"
+    />
+    <van-card
+      title="Third News"
+      desc="Description of the news"
+      thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+      :style="{ 'background-color': '#f999de' }"
+    />
+  </div>
 
   <div class="text-l font-bold mt-3 text-[#FE47D0]">
     <van-divider 
@@ -59,27 +58,26 @@
     </van-divider>
   </div>
 
-  <van-card
-    class="m-3 mt-3 custom-card"
-    title="First Announcements"
-    desc="Description of the Announcements"
-    thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
-    :style="{ 'background-color': '#f999de' }"
-  />
-  <van-card
-    class="m-3 mt-3 custom-card"
-    title="Second Announcements"
-    desc="Description of the Announcements"
-    thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
-    :style="{ 'background-color': '#f999de' }"
-  />
-  <van-card
-    class="m-3 mt-3 mb-10 custom-card"
-    title="Third Announcements"
-    desc="Description of the Announcements"
-    thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
-    :style="{ 'background-color': '#f999de' }"
-  />
+  <div class="m-3 mt-3 custom-card">
+    <van-card
+      title="First Announcements"
+      desc="Description of the Announcements"
+      thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+      :style="{ 'background-color': '#f999de' }"
+    />
+    <van-card
+      title="Second Announcements"
+      desc="Description of the Announcements"
+      thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+      :style="{ 'background-color': '#f999de' }"
+    />
+    <van-card
+      title="Third Announcements"
+      desc="Description of the Announcements"
+      thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+      :style="{ 'background-color': '#f999de' }"
+    />
+  </div>
 
 </template>
 

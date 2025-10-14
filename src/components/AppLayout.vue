@@ -97,7 +97,7 @@
                         placeholder="Password"
                         :rules="[{ required: true, message: 'Password is required' }]"
                     />
-                <van-field
+                    <van-field
                         v-model="date"
                         name="date"
                         label="Date"
@@ -165,7 +165,8 @@ import { useRouter } from 'vue-router'
             // date: date.value
         }
 
-        console.log('submit', formData)
+        localStorage.setItem('username', formData.username)
+        localStorage.setItem('password', formData.password)
 
         router.push({ 
             name: 'user',
