@@ -243,8 +243,8 @@
         })
         .then(() => {
             liff.logout()
-            window.location.reload()
-            // router.push('/') 
+            // window.location.reload()
+            router.push('/') 
             // console.log('user logged out')
         })
         .catch(() => {
