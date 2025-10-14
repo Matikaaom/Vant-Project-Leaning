@@ -87,9 +87,24 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useWindowSize } from '@vueuse/core'
+import liff from '@line/liff';
+
+const main = async () => {
+ 
+  if (!liff.isLoggedIn()) {
+    // ถ้ายังไม่ล็อกอิน ให้ login
+    liff.login();
+  } else {
+    // ถ้าล็อกอินแล้ว ไปหน้า Home เลย
+    router.push({ name: 'home' });
+  }
+}
+ onMounted(() => {
+  main();
+});
 
 
 const router = useRouter()
