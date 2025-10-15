@@ -6,7 +6,8 @@
       left-icon="volume-o"
     />
 
-    <img src="@/assets/StarCatLOGO.png" alt="Logo" class="w-30 h-30 mx-auto mt-5"/>
+    <!-- <img src="@/assets/StarCatLOGO.png" alt="Logo" class="w-30 h-30 mx-auto mt-5"/> -->
+    <img v-if="profileUser?.pictureUrl" :src="profileUser.pictureUrl" alt="Profile" class="w-30 h-30 rounded-full mx-auto"/>
 
     <div class="text-l text-center font-bold mt-3 mb-3 text-[#DD0186]">
         <h1>User Details</h1>
@@ -27,7 +28,7 @@
     <van-form>
         <van-cell-group inset>
             <van-field
-                v-model="profileUser"
+                v-model="username"
                 name="Username"
                 label="Username"
                 class="custom-field"
@@ -160,19 +161,6 @@
     import liff from '@line/liff'
     import { color } from 'echarts'
     import { StorageSerializers, useStorage } from "@vueuse/core"
-
-    const LIFF_ID = "2008284940-aZ5dYpXy";
-    onMounted(async () => {
-    try {
-        await liff.init({ liffId: LIFF_ID });
-        const profile = await liff.getProfile();
-        console.log(profile)
-    } catch (error) {
-        console.log('error', error);
-        console.error('LIFF initialization failed', error);
-    }
-    });
-
     const profileUser = useStorage("profileUser", null, undefined, { serializer: StorageSerializers.object })
 
     const router = useRouter()
