@@ -166,14 +166,7 @@
     onMounted(async () => {
         await liff.init({ liffId: '2008284940-aZ5dYpXy' })
 
-        if (!liff.isLoggedIn()) {
-            liff.login()
-            return
-        }
-
         const profile = await liff.getProfile()
-        console.log('LINE profile', profile)
-
         profileUser.value = {
             userId: profile.userId,
             displayName: profile.displayName,
