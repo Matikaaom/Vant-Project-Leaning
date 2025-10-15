@@ -1,8 +1,6 @@
 <template>
   <div class="page-container">
 
-    <img id="pictureUrl">
-
     <!-- Header -->
     <div class="header">
       <van-overlay :show="isSidebarOpen"  :style="{ backgroundColor: 'transparent' }"  @click="toggleSidebar"/>

@@ -162,6 +162,27 @@
     import { color } from 'echarts'
     import { StorageSerializers, useStorage } from "@vueuse/core"
     const profileUser = useStorage("profileUser", null, undefined, { serializer: StorageSerializers.object })
+    
+    onMounted(async () => {
+        await liff.init({ liffId: 'YOUR_LIFF_ID' })
+
+        if (!liff.isLoggedIn()) {
+            liff.login()
+            return
+        }
+
+        const profile = await liff.getProfile()
+        console.log('LINE profile', profile)
+
+        profileUser.value = {
+            userId: profile.userId,
+            displayName: profile.displayName,
+            pictureUrl: profile.pictureUrl,
+            statusMessage: profile.statusMessage,
+        }
+
+        username.value = profile.displayName
+        })
 
     const router = useRouter()
 
