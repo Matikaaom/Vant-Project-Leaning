@@ -9,7 +9,7 @@
     <!-- <img src="@/assets/StarCatLOGO.png" alt="Logo" class="w-30 h-30 mx-auto mt-5"/> -->
     <img id="pictureUrl" v-if="profileUser?.pictureUrl" :src="profileUser.pictureUrl" alt="Profile" class="w-30 h-30 mt-5 rounded-full mx-auto"/>
 
-    <div class="text-l text-center font-bold mt-3 mb-3 text-[#DD0186]">
+    <div class="text-l text-center font-bold mt-3 text-[#DD0186]">
         <h1>User Details</h1>
     </div>
 
