@@ -94,17 +94,17 @@ import liff from '@line/liff';
 
 
 
-const LIFF_ID = "2008284940-aZ5dYpXy";
-onMounted(async () => {
-  try {
-    await liff.init({ liffId: LIFF_ID });
-    const profile = await liff.getProfile();
-    console.log(profile)
-  } catch (error) {
-    console.log('error', error);
-    console.error('LIFF initialization failed', error);
-  }
-});
+// const LIFF_ID = "2008284940-aZ5dYpXy";
+// onMounted(async () => {
+//   try {
+//     await liff.init({ liffId: LIFF_ID });
+//     const profile = await liff.getProfile();
+//     console.log(profile)
+//   } catch (error) {
+//     console.log('error', error);
+//     console.error('LIFF initialization failed', error);
+//   }
+// });
 
 // const main = async () => {
  
