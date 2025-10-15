@@ -29,24 +29,26 @@
         <van-cell-group inset>
             <van-field
                 v-model="userId"
-                name="User Id"
-                label="User Id"
-                class="custom-field"
-                placeholder="User Id"
-                :rules="[{ required: true, message: 'User Id is required' }]"
+                name="User ID"
+                label="User ID"
+                placeholder="User ID"
+                class="mr-5"
+                :rules="[{ required: true, message: 'User ID is required' }]"
             />
             <van-field
                 v-model="displayName"
                 name="Display Name"
-                label="Display Name"
-                placeholder="Display Name"
-                :rules="[{ required: true, message: 'Display Name is required' }]"
+                label="UserName"
+                placeholder="UserName"
+                class="mr-5"
+                :rules="[{ required: true, message: 'UserName is required' }]"
             />
             <van-field
                 v-model="statusMessage"
                 name="Status Message"
                 label="Status Message"
                 placeholder="Status Message"
+                class="mr-5"
                 :rules="[{ required: true, message: 'Status Message is required' }]"
             />
 
@@ -56,6 +58,7 @@
                 readonly
                 label="Gender"
                 placeholder="Select Gender"
+                class="mr-5"
                 @click="showgender = true"
                 :rules="[{ required: true, message: 'Gender is required' }]"
             />
@@ -72,11 +75,13 @@
                 name="birthDate"
                 label="Date of Birth"
                 placeholder="Select Date"
+                class="mr-5"
                 @click="showPicker = true"
                 :rules="[{ required: true, message: 'Date is required' }]"
             />
-            <van-popup v-model:show="showPicker" destroy-on-close position="bottom">
+            <van-popup v-model:show="showPicker" destroy-on-close position="bottom" class="mr-5">
             <van-date-picker
+                class="mr-5"
                 :model-value="pickerValue"
                 @confirm="onConfirm"
                 @cancel="showPicker = false"
