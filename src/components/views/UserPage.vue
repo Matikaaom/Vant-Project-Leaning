@@ -29,25 +29,25 @@
         <van-cell-group inset>
             <van-field
                 v-model="userId"
-                name="UserId"
-                label="UserId"
+                name="User Id"
+                label="User Id"
                 class="custom-field"
-                placeholder="UserId"
-                :rules="[{ required: true, message: 'UserId is required' }]"
+                placeholder="User Id"
+                :rules="[{ required: true, message: 'User Id is required' }]"
             />
             <van-field
                 v-model="displayName"
-                name="DisplayName"
-                label="DisplayName"
-                placeholder="DisplayName"
-                :rules="[{ required: true, message: 'DisplayName is required' }]"
+                name="Display Name"
+                label="Display Name"
+                placeholder="Display Name"
+                :rules="[{ required: true, message: 'Display Name is required' }]"
             />
             <van-field
                 v-model="statusMessage"
-                name="StatusMessage"
-                label="StatusMessage"
-                placeholder="StatusMessage"
-                :rules="[{ required: true, message: 'StatusMessage is required' }]"
+                name="Status Message"
+                label="Status Message"
+                placeholder="Status Message"
+                :rules="[{ required: true, message: 'Status Message is required' }]"
             />
 
             <van-field
@@ -180,8 +180,7 @@
             pictureUrl: profile.pictureUrl,
             statusMessage: profile.statusMessage,
         }
-
-        userId.value = profile. userId
+        userId.value = profile.userId
         displayName.value = profile.displayName
         statusMessage.value = profile.statusMessage
         })
