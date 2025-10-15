@@ -45,11 +45,11 @@
             />
             <van-field
                 v-model="statusMessage"
-                name="Status Message"
-                label="Status Message"
-                placeholder="Status Message"
+                name="Status"
+                label="Status"
+                placeholder="Status"
                 class="mr-5"
-                :rules="[{ required: true, message: 'Status Message is required' }]"
+                :rules="[{ required: true, message: 'Status is required' }]"
             />
 
             <van-field
