@@ -91,20 +91,32 @@ import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useWindowSize } from '@vueuse/core'
 import liff from '@line/liff';
-
-const main = async () => {
- 
-  if (!liff.isLoggedIn()) {
-    // ถ้ายังไม่ล็อกอิน ให้ login
-    liff.login();
-  } else {
-    // ถ้าล็อกอินแล้ว ไปหน้า Home เลย
-    router.push({ name: 'home' });
+const LIFF_ID = "2008284940-aZ5dYpXy";
+onMounted(async () => {
+  try {
+    await liff.init({ liffId: LIFF_ID });
+    const profile = await liff.getProfile();
+    console.log(profile)
+  } catch (error) {
+    console.log('error', error);
+    console.error('LIFF initialization failed', error);
   }
-}
- onMounted(() => {
-  main();
+
+
 });
+
+// const main = async () => {
+ 
+//   if (!liff.isLoggedIn()) {
+//     // ถ้ายังไม่ล็อกอิน ให้ login
+//     liff.login();
+//   } else {
+//     // ถ้าล็อกอินแล้ว ไปหน้า Home เลย
+//     router.push({ name: 'home' });
+//   }
+// }
+// main();
+
 
 const router = useRouter()
 

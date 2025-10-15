@@ -248,7 +248,8 @@
             // router.push('/') 
             // console.log('user logged out')
         })
-        .catch(() => {
+        .catch((error) => {
+            console.error('LIFF logout failed', error);
             console.log('user cancel logout')
         })
     }
