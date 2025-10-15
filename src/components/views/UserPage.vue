@@ -181,7 +181,9 @@
             statusMessage: profile.statusMessage,
         }
 
-        userId.value = profile.displayName
+        userId.value = profile. userId
+        displayName.value = profile.displayName
+        statusMessage.value = profile.statusMessage
         })
 
     const router = useRouter()
