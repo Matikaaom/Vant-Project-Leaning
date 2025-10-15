@@ -27,7 +27,7 @@
     <van-form>
         <van-cell-group inset>
             <van-field
-                v-model="username"
+                v-model="profileUser"
                 name="Username"
                 label="Username"
                 class="custom-field"
@@ -159,6 +159,21 @@
     import { useRoute, useRouter } from 'vue-router'
     import liff from '@line/liff'
     import { color } from 'echarts'
+    import { StorageSerializers, useStorage } from "@vueuse/core"
+
+    const LIFF_ID = "2008284940-aZ5dYpXy";
+    onMounted(async () => {
+    try {
+        await liff.init({ liffId: LIFF_ID });
+        const profile = await liff.getProfile();
+        console.log(profile)
+    } catch (error) {
+        console.log('error', error);
+        console.error('LIFF initialization failed', error);
+    }
+    });
+
+    const profileUser = useStorage("profileUser", null, undefined, { serializer: StorageSerializers.object })
 
     const router = useRouter()
 
