@@ -82,7 +82,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onBeforeMount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useWindowSize } from '@vueuse/core'
 import liff from '@line/liff';
@@ -113,8 +113,7 @@ const LIFF_ID = "2008284940-aZ5dYpXy"
 
 // const LIFF_ID = "2008284940-aZ5dYpXy";
 
-// onMounted(async () => {
-//   try {
+// onBeforeMount(async () => {
 //     await liff.init({ liffId: LIFF_ID });
 
 //     if (!liff.isLoggedIn()) {
@@ -122,30 +121,38 @@ const LIFF_ID = "2008284940-aZ5dYpXy"
 //       liff.login();
 //       return; // stop ต่อไม่ให้โหลดเนื้อหา
 //     }
-
-//     // ถ้า login แล้ว
-//     const profile = await liff.getProfile();
-//     console.log(profile);
-
-//   } catch (error) {
-//     console.error('LIFF initialization failed', error);
-//   }
 // });
 
-onMounted(async () => {
-  try {
-    await liff.init({ liffId: LIFF_ID });
-    const profile = await liff.getProfile();
-    console.log(profile)
+// onMounted(async () => {
+//   try {
+//     await liff.init({ liffId: LIFF_ID });
+//     const profile = await liff.getProfile();
+//     console.log(profile)
     
-  } catch (error) {
-    console.log('error', error);
-    console.error('LIFF initialization failed', error);
-  }
+//   } catch (error) {
+//     console.log('error', error);
+//     console.error('LIFF initialization failed', error);
+//   }
   
-});
+// });
 
-// const router = useRouter()
+onBeforeMount(async () => {
+  await liff.init({ liffId: LIFF_ID })
+
+  if (!liff.isLoggedIn()) {
+    // ถ้ายังไม่ล็อกอิน ให้ล็อกอินก่อน แล้วหยุดการทำงานต่อ
+    liff.login()
+    return
+  }
+
+  // ถ้าล็อกอินแล้ว ค่อยไปดึง profile
+  try {
+    const profile = await liff.getProfile()
+    console.log('LINE Profile:', profile)
+  } catch (error) {
+    console.error('Error getting profile:', error)
+  }
+})
 
 const active = ref('home')
 const isSidebarOpen = ref(false)
