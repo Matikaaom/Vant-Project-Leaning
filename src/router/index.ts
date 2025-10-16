@@ -21,14 +21,14 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.path === '/') {
-    // redirect ไปหน้าเช็กก่อน
-    next('/mobile')
-  } else {
-    next()
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.path === '/') {
+//     // redirect ไปหน้าเช็กก่อน
+//     next('/mobile')
+//   } else {
+//     next()
+//   }
+// })
 
 // router.beforeEach(async (to, from, next) => {
 //   if (!liff.isInClient() && to.path !== '/mobile') {
