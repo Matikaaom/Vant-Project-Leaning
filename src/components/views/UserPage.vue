@@ -6,7 +6,6 @@
       left-icon="volume-o"
     />
 
-    <!-- <img src="@/assets/StarCatLOGO.png" alt="Logo" class="w-30 h-30 mx-auto mt-5"/> -->
     <img id="pictureUrl" v-if="profileUser?.pictureUrl" :src="profileUser.pictureUrl" alt="Profile" class="w-35 h-35 mt-10 rounded-full mx-auto"/>
 
     <div class="text-l text-center font-bold mt-3 text-[#DD0186]">
@@ -103,40 +102,6 @@
             </van-button>
         </div>
     </van-form>
-    
-    <!-- <van-cell-group inset >
-        <van-field
-            v-model="displayName"
-            name="displayName"
-            label="displayName"
-            class="custom-field"
-            disabled
-        />
-        <van-field
-            v-model="statusMessage"
-            name="statusMessage"
-            label="statusMessage"
-            disabled
-        />
-        <van-field
-            v-model="userId"
-            name="userId"
-            label="userId"
-            disabled
-        />
-        <van-field
-            v-model="password"
-            name="password"
-            label="Password"
-            disabled
-        />
-        <van-field
-            v-model="date"
-            name="date"
-            label="Date"
-            disabled
-        />
-    </van-cell-group> -->
 
     <div class="p-4">
         <van-grid :column-num="3">
@@ -278,16 +243,6 @@
 
     onMounted(() => {
 
-    // if (route.query.userId){
-    //     localStorage.setItem('userId', route.query.userId as string)
-    //     localStorage.setItem('password', route.query.password as string)
-    //     localStorage.setItem('displayName', route.query.displayName as string)
-    //     localStorage.setItem('statusMessage', route.query.statusMessage as string)
-    //     localStorage.setItem('showdate', route.query.showdate as string)
-    //     localStorage.setItem('gender', route.query.gender as string)
-    //     localStorage.setItem('telnum', route.query.telnum as string)
-    // }
-
     // ดึงจาก localStorage มาแสดง
         userId.value = localStorage.getItem('userId') || ''
         password.value = localStorage.getItem('password') || ''
@@ -307,11 +262,6 @@
     --van-picker-confirm-action-color: #f533a7;
     --van-picker-option-text-color: #f533a7;
     --van-action-sheet-item-background: #FFCFF2;
-    /* --van-dialog-has-title-message-text-color: #f533a7; */
 }
-
-/* .van-dialog__header {
-  color: #f533a7; 
-} */
 
 </style>

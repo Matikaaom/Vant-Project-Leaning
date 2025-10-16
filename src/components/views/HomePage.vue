@@ -10,8 +10,6 @@
     <h1>News and Announcements</h1>
   </div>
 
-  <!-- <van-search v-model="value" background="#f999de" placeholder="Placeholder" /> -->
-
   <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
     <van-swipe-item>CAT 1</van-swipe-item>
     <van-swipe-item>CAT 2</van-swipe-item>
@@ -82,28 +80,6 @@
 </template>
 
 <script lang="ts" setup>
-
-import { ref, onMounted } from 'vue'
-// import { useRouter } from 'vue-router';
-// import liff from '@line/liff';
-
-// const router= useRouter();
-
-// const main = async () => {
- 
-//   if (!liff.isLoggedIn()) {
-//     // ถ้ายังไม่ล็อกอิน ให้ login
-//     liff.login();
-//   } else {
-//     // ถ้าล็อกอินแล้ว ไปหน้า Home เลย
-//     router.push({ name: 'home' });
-//   }
-// }
-//  onMounted(() => {
-//   main();
-// });
-
-const value = ref('')
 
 </script>
 

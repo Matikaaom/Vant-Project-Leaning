@@ -17,11 +17,6 @@
         </template>
       </van-nav-bar>
 
-      <!-- Notice Bar -->
-      <!-- <van-notice-bar
-        text="luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma luv ma"
-        left-icon="volume-o"
-      /> -->
     </div>
 
     <!-- Desktop layout -->
@@ -104,23 +99,10 @@ onMounted(async () => {
   }
 });
 
-// const main = async () => {
- 
-//   if (!liff.isLoggedIn()) {
-//     // ถ้ายังไม่ล็อกอิน ให้ login
-//     liff.login();
-//   } else {
-//     // ถ้าล็อกอินแล้ว ไปหน้า Home เลย
-//     router.push({ name: 'home' });
-//   }
-// }
-// main();
-
-
 const router = useRouter()
 
 const active = ref('home')
-const isSidebarOpen = ref(false) // เริ่มแรกปิดไว้
+const isSidebarOpen = ref(false)
 
 // toggle sidebar
 function toggleSidebar() {

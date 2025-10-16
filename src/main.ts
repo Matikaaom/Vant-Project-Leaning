@@ -8,7 +8,6 @@ import thTH from './locale/lang/th-TH'
 import { Locale } from 'vant';
 import '@vant/touch-emulator';
 
-
 const app = createApp(App)
 Locale.use('th-TH', thTH)
 // Locale.use('en-US', enEN)
