@@ -39,7 +39,7 @@ import '@vant/touch-emulator';
 import liff from '@line/liff'
 
 const LIFF_ID = '2008284940-aZ5dYpXy'
-const EXPIRE_TIME = 30 * 60 * 1000 // 30 นาที
+const EXPIRE_TIME = 1 * 60 * 1000 // 30 นาที
 
 async function bootstrap() {
   await liff.init({ liffId: LIFF_ID })
