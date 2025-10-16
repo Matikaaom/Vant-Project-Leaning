@@ -125,13 +125,10 @@
     import liff from '@line/liff'
     import { color } from 'echarts'
     import { StorageSerializers, useStorage } from "@vueuse/core"
+    
     const profileUser = useStorage("profileUser", null, undefined, { serializer: StorageSerializers.object })
     
     onMounted(async () => {
-        if (!liff.isLoggedIn()) {
-            liff.login()
-            return
-        }
 
         const profile = await liff.getProfile()
         console.log('LINE profile', profile)

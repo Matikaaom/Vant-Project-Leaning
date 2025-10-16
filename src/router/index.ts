@@ -9,7 +9,7 @@ import liff from "@line/liff"
 
 const routes = [
   // { path: '/', component: AppLayout },
-  { path: '/', name: 'home', component: HomePage, redirecredirect: '/mobile' },
+  { path: '/', name: 'home', component: HomePage },
   { path: '/mobile', name: 'mobile', component: CheckMobile} ,
   { path: '/steps', name: 'steps', component: StepsPage },
   { path: '/dashboard', name: 'dashboard', component: DashboardPage },
@@ -21,6 +21,15 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.path === '/') {
+    // redirect ไปหน้าเช็กก่อน
+    next('/mobile')
+  } else {
+    next()
+  }
+})
+
 // router.beforeEach(async (to, from, next) => {
 //   if (!liff.isInClient() && to.path !== '/mobile') {
 //     next('/mobile')
@@ -28,6 +37,7 @@ const router = createRouter({
 //     next()
 //   }
 // })
+
 
 export default router
 
