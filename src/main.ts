@@ -31,9 +31,12 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import liff from '@line/liff'
-import { Locale } from 'vant'
+import './assets/main.css'
+import 'vant/lib/index.css';
 import thTH from './locale/lang/th-TH'
+import { Locale } from 'vant';
+import '@vant/touch-emulator';
+import liff from '@line/liff'
 
 const LIFF_ID = '2008284940-aZ5dYpXy'
 const EXPIRE_TIME = 30 * 60 * 1000 // 30 นาที
