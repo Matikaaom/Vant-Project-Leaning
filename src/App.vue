@@ -91,7 +91,7 @@ const router = useRouter()
 const LIFF_ID = "2008284940-aZ5dYpXy"
 
 onMounted(async () => {
-  const isInLiff = window.liff?.isInClient?.() // ตรวจสอบว่าอยู่ใน LINE LIFF
+  const isInLiff = (window as any).liff?.isInClient?.() // ตรวจสอบว่าอยู่ใน LINE LIFF
   const liffUrl = window.location.href.includes('liff.line.me')
 
   if (liffUrl && !isInLiff) {
