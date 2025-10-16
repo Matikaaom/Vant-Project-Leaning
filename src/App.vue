@@ -140,7 +140,7 @@ onBeforeMount(async () => {
   await liff.init({ liffId: LIFF_ID })
 
   if (!liff.isLoggedIn()) {
-    liff.login()
+    await liff.login()
     return
   }
 
