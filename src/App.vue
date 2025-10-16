@@ -90,42 +90,39 @@ import liff from '@line/liff';
 const router = useRouter()
 const LIFF_ID = "2008284940-aZ5dYpXy"
 
-onMounted(async () => {
-  try {
-    await liff.init({ liffId: LIFF_ID })
-    
-    if (!liff.isInClient()) {
-      // ถ้าไม่ได้เปิดจาก LINE LIFF → redirect /mobile
-      if (router.currentRoute.value.path !== '/mobile') {
-        router.replace('/mobile')
-      }
-      return
-    }
-
-    // ถ้าอยู่ใน LINE LIFF → ดึง profile ปกติ
-    const profile = await liff.getProfile()
-    console.log(profile)
-  } catch (error) {
-    console.error('LIFF initialization failed', error)
-    // กรณี error ลอง redirect ไปหน้า login ปกติ
-    if (router.currentRoute.value.path !== '/login') {
-      router.replace('/login')
-    }
-  }
-})
-
-// const LIFF_ID = "2008284940-aZ5dYpXy";
 // onMounted(async () => {
 //   try {
-//     await liff.init({ liffId: LIFF_ID });
-//     const profile = await liff.getProfile();
+//     await liff.init({ liffId: LIFF_ID })
+    
+//     if (!liff.isInClient()) {
+//       // ถ้าไม่ได้เปิดจาก LINE LIFF → redirect /mobile
+//       if (router.currentRoute.value.path !== '/mobile') {
+//         router.replace('/mobile')
+//       }
+//       return
+//     }
+
+//     // ถ้าอยู่ใน LINE LIFF → ดึง profile ปกติ
+//     const profile = await liff.getProfile()
 //     console.log(profile)
 //   } catch (error) {
-//     console.log('error', error);
-//     console.error('LIFF initialization failed', error);
+//     console.error('LIFF initialization failed', error)
+//     // กรณี error ลอง redirect ไปหน้า login ปกติ
 //   }
+// })
+
+// const LIFF_ID = "2008284940-aZ5dYpXy";
+onMounted(async () => {
+  try {
+    await liff.init({ liffId: LIFF_ID });
+    const profile = await liff.getProfile();
+    console.log(profile)
+  } catch (error) {
+    console.log('error', error);
+    console.error('LIFF initialization failed', error);
+  }
   
-// });
+});
 
 // const router = useRouter()
 
