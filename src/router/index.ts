@@ -21,13 +21,13 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach(async (to, from, next) => {
-  if (!liff.isInClient() && to.path !== '/mobile') {
-    next('/mobile')
-  } else {
-    next()
-  }
-})
+// router.beforeEach(async (to, from, next) => {
+//   if (!liff.isInClient() && to.path !== '/mobile') {
+//     next('/mobile')
+//   } else {
+//     next()
+//   }
+// })
 
 export default router
 

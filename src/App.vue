@@ -87,19 +87,43 @@ import { useRoute, useRouter } from 'vue-router'
 import { useWindowSize } from '@vueuse/core'
 import liff from '@line/liff';
 
-const LIFF_ID = "2008284940-aZ5dYpXy";
+const router = useRouter()
+const LIFF_ID = "2008284940-aZ5dYpXy"
+
 onMounted(async () => {
+  const isInLiff = window.liff?.isInClient?.() // ตรวจสอบว่าอยู่ใน LINE LIFF
+  const liffUrl = window.location.href.includes('liff.line.me')
+
+  if (liffUrl && !isInLiff) {
+    // ถ้าเปิดจาก LIFF URL แต่ไม่ได้อยู่ใน LINE → redirect /mobile
+    router.replace('/mobile')
+    return // หยุดการทำงานต่อ
+  }
+
+  // ถ้าเข้าจากเว็บเราปกติ หรืออยู่ใน LIFF → init LIFF ปกติ
   try {
-    await liff.init({ liffId: LIFF_ID });
-    const profile = await liff.getProfile();
+    await liff.init({ liffId: LIFF_ID })
+    const profile = await liff.getProfile()
     console.log(profile)
   } catch (error) {
-    console.log('error', error);
-    console.error('LIFF initialization failed', error);
+    console.error('LIFF initialization failed', error)
   }
-});
+})
 
-const router = useRouter()
+// const LIFF_ID = "2008284940-aZ5dYpXy";
+// onMounted(async () => {
+//   try {
+//     await liff.init({ liffId: LIFF_ID });
+//     const profile = await liff.getProfile();
+//     console.log(profile)
+//   } catch (error) {
+//     console.log('error', error);
+//     console.error('LIFF initialization failed', error);
+//   }
+  
+// });
+
+// const router = useRouter()
 
 const active = ref('home')
 const isSidebarOpen = ref(false)
