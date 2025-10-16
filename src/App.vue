@@ -91,22 +91,26 @@ const router = useRouter()
 const LIFF_ID = "2008284940-aZ5dYpXy"
 
 onMounted(async () => {
-  const isInLiff = (window as any).liff?.isInClient?.() // ตรวจสอบว่าอยู่ใน LINE LIFF
-  const liffUrl = window.location.href.includes('liff.line.me')
-
-  if (liffUrl && !isInLiff) {
-    // ถ้าเปิดจาก LIFF URL แต่ไม่ได้อยู่ใน LINE → redirect /mobile
-    router.replace('/mobile')
-    return // หยุดการทำงานต่อ
-  }
-
-  // ถ้าเข้าจากเว็บเราปกติ หรืออยู่ใน LIFF → init LIFF ปกติ
   try {
     await liff.init({ liffId: LIFF_ID })
+    
+    if (!liff.isInClient()) {
+      // ถ้าไม่ได้เปิดจาก LINE LIFF → redirect /mobile
+      if (router.currentRoute.value.path !== '/mobile') {
+        router.replace('/mobile')
+      }
+      return
+    }
+
+    // ถ้าอยู่ใน LINE LIFF → ดึง profile ปกติ
     const profile = await liff.getProfile()
     console.log(profile)
   } catch (error) {
     console.error('LIFF initialization failed', error)
+    // กรณี error ลอง redirect ไปหน้า login ปกติ
+    if (router.currentRoute.value.path !== '/login') {
+      router.replace('/login')
+    }
   }
 })
 
