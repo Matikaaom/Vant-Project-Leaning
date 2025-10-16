@@ -4,13 +4,15 @@ import HomePage from '@/components/views/HomePage.vue'
 import StepsPage from '@/components/views/StepsPage.vue'
 import DashboardPage from '@/components/views/DashboardPage.vue'
 import UserPage from '@/components/views/UserPage.vue'
+import CheckMobile from '@/components/views/CheckMobile.vue'
 
 const routes = [
   // { path: '/', component: AppLayout },
   { path: '/', name: 'home', component: HomePage },
   { path: '/steps', name: 'steps', component: StepsPage },
   { path: '/dashboard', name: 'dashboard', component: DashboardPage },
-  { path: '/user', name: 'user', component: UserPage }
+  { path: '/user', name: 'user', component: UserPage },
+  { path: '/mobile', name: 'mobile', component: CheckMobile} 
 ]
 
 const router = createRouter({
