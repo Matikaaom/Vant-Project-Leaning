@@ -11,7 +11,7 @@
       >
         <template #left>
           <!-- ปุ่ม burger -->
-          <div class="burger-btn" v-if="isLargeScreen" @click="toggleSidebar" >
+          <div class="burger-btn" v-if="isLargeScreen && showSidebarOrTabbar" @click="toggleSidebar" >
             <van-icon color="#FE26C7" name="wap-nav" />
           </div>
         </template>
@@ -25,7 +25,7 @@
     </div>
 
     <!-- Desktop layout -->
-    <div v-if="isLargeScreen " class="layout">
+    <div v-if="isLargeScreen && showSidebarOrTabbar" class="layout">
       <!-- Sidebar -->
       <transition name="slide">
         <div v-show="isSidebarOpen" class="sidebar">
@@ -70,7 +70,7 @@
 
     <!-- Mobile Tabbar -->
     <van-tabbar 
-      v-if="!isLargeScreen "
+      v-if="!isLargeScreen && showSidebarOrTabbar"
       v-model="active"  
       :style="{ backgroundColor: '#FFCFF2' }"
       active-color="#FE26C7"
@@ -134,7 +134,7 @@ const isLargeScreen = computed(() => width.value > 768)
 
 // ตรวจสอบ path ปัจจุบัน 
 const route = useRoute()
-// const showSidebarOrTabbar = computed(() => route.path !== '/')
+const showSidebarOrTabbar = computed(() => route.path !== '/mobile')
 
 </script>
 

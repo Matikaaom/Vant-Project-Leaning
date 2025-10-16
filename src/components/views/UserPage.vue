@@ -163,8 +163,6 @@
     const profileUser = useStorage("profileUser", null, undefined, { serializer: StorageSerializers.object })
     
     onMounted(async () => {
-        await liff.init({ liffId: '2008284940-aZ5dYpXy' })
-
         if (!liff.isLoggedIn()) {
             liff.login()
             return
