@@ -11,8 +11,8 @@ import liff from '@line/liff'
 const LIFF_ID = '2008284940-aZ5dYpXy' // ใส่ LIFF ID จริง
 
 // ครอบ if...else ง่าย ๆ
-function bootstrap() {
-  liff.init({ liffId: LIFF_ID })
+async function bootstrap() {
+  await liff.init({ liffId: LIFF_ID })
 
   if (!liff.isLoggedIn()) {
     // ยังไม่ login → redirect ไป LINE login
