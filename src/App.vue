@@ -1,5 +1,5 @@
 <template>
-  <div class="page-container">
+  <div v-if="isReady" class="page-container">
 
     <!-- Header -->
     <div class="header">
@@ -89,6 +89,7 @@ import liff from '@line/liff';
 
 const router = useRouter()
 const LIFF_ID = "2008284940-aZ5dYpXy"
+const isReady = ref(false)
 
 // onMounted(async () => {
 //   try {
@@ -140,7 +141,6 @@ onBeforeMount(async () => {
   await liff.init({ liffId: LIFF_ID })
 
   if (!liff.isLoggedIn()) {
-    // ถ้ายังไม่ล็อกอิน ให้ล็อกอินก่อน แล้วหยุดการทำงานต่อ
     liff.login()
     return
   }
@@ -153,6 +153,8 @@ onBeforeMount(async () => {
     console.error('Error getting profile:', error)
   }
 })
+  // ให้ DOM render หลังจาก liff เสร็จจริง
+  isReady.value = true
 
 const active = ref('home')
 const isSidebarOpen = ref(false)
