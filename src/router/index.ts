@@ -6,8 +6,8 @@ import DashboardPage from '@/components/views/DashboardPage.vue'
 import UserPage from '@/components/views/UserPage.vue'
 
 const routes = [
-  { path: '/', component: AppLayout },
-  { path: '/home', name: 'home', component: HomePage },
+  // { path: '/', component: AppLayout },
+  { path: '/', name: 'home', component: HomePage },
   { path: '/steps', name: 'steps', component: StepsPage },
   { path: '/dashboard', name: 'dashboard', component: DashboardPage },
   { path: '/user', name: 'user', component: UserPage }

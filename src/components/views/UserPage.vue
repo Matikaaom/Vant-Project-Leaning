@@ -6,9 +6,10 @@
       left-icon="volume-o"
     />
 
-    <img src="@/assets/StarCatLOGO.png" alt="Logo" class="w-30 h-30 mx-auto mt-5"/>
+    <!-- <img src="@/assets/StarCatLOGO.png" alt="Logo" class="w-30 h-30 mx-auto mt-5"/> -->
+    <img id="pictureUrl" v-if="profileUser?.pictureUrl" :src="profileUser.pictureUrl" alt="Profile" class="w-35 h-35 mt-10 rounded-full mx-auto"/>
 
-    <div class="text-l text-center font-bold mt-3 mb-3 text-[#DD0186]">
+    <div class="text-l text-center font-bold mt-3 text-[#DD0186]">
         <h1>User Details</h1>
     </div>
 
@@ -27,26 +28,25 @@
     <van-form>
         <van-cell-group inset>
             <van-field
-                v-model="username"
-                name="Username"
+                v-model="userId"
+                name="User ID"
+                label="User ID"
+                placeholder="User ID"
+                :rules="[{ required: true, message: 'User ID is required' }]"
+            />
+            <van-field
+                v-model="displayName"
+                name="Displayname"
                 label="Username"
-                class="custom-field"
-                placeholder="Username"
+                placeholder="UserName"
                 :rules="[{ required: true, message: 'Username is required' }]"
             />
             <van-field
-                v-model="firstname"
-                name="Firstname"
-                label="Firstname"
-                placeholder="Firstname"
-                :rules="[{ required: true, message: 'Firstname is required' }]"
-            />
-            <van-field
-                v-model="lastname"
-                name="lastname"
-                label="Lastname"
-                placeholder="Lastname"
-                :rules="[{ required: true, message: 'Lastname is required' }]"
+                v-model="statusMessage"
+                name="Status"
+                label="Status"
+                placeholder="Status"
+                :rules="[{ required: true, message: 'Status is required' }]"
             />
 
             <van-field
@@ -74,7 +74,7 @@
                 @click="showPicker = true"
                 :rules="[{ required: true, message: 'Date is required' }]"
             />
-            <van-popup v-model:show="showPicker" destroy-on-close position="bottom">
+            <van-popup v-model:show="showPicker" destroy-on-close position="bottom" class="mr-5">
             <van-date-picker
                 :model-value="pickerValue"
                 @confirm="onConfirm"
@@ -106,22 +106,22 @@
     
     <!-- <van-cell-group inset >
         <van-field
-            v-model="firstname"
-            name="firstname"
-            label="Firstname"
+            v-model="displayName"
+            name="displayName"
+            label="displayName"
             class="custom-field"
             disabled
         />
         <van-field
-            v-model="lastname"
-            name="lastname"
-            label="Lastname"
+            v-model="statusMessage"
+            name="statusMessage"
+            label="statusMessage"
             disabled
         />
         <van-field
-            v-model="username"
-            name="username"
-            label="Username"
+            v-model="userId"
+            name="userId"
+            label="userId"
             disabled
         />
         <van-field
@@ -157,7 +157,32 @@
     import { ref, onMounted, computed } from 'vue'
     import { showConfirmDialog, showNotify } from 'vant'
     import { useRoute, useRouter } from 'vue-router'
-import { color } from 'echarts'
+    import liff from '@line/liff'
+    import { color } from 'echarts'
+    import { StorageSerializers, useStorage } from "@vueuse/core"
+    const profileUser = useStorage("profileUser", null, undefined, { serializer: StorageSerializers.object })
+    
+    onMounted(async () => {
+        await liff.init({ liffId: '2008284940-aZ5dYpXy' })
+
+        if (!liff.isLoggedIn()) {
+            liff.login()
+            return
+        }
+
+        const profile = await liff.getProfile()
+        console.log('LINE profile', profile)
+
+        profileUser.value = {
+            userId: profile.userId,
+            displayName: profile.displayName,
+            pictureUrl: profile.pictureUrl,
+            statusMessage: profile.statusMessage,
+        }
+        userId.value = profile.userId
+        displayName.value = profile.displayName
+        statusMessage.value = profile.statusMessage
+        })
 
     const router = useRouter()
 
@@ -165,10 +190,10 @@ import { color } from 'echarts'
 
     const value = ref(3);
 
-    const firstname = ref('')
-    const lastname = ref('')
+    const displayName = ref('')
+    const statusMessage = ref('')
     const password = ref('')
-    const username = ref('')
+    const userId = ref('')
     const date = ref('')
 
     const telnum = ref('')
@@ -210,9 +235,9 @@ import { color } from 'echarts'
         .then(() => {
             showNotify({ background: '#FF5BC6', message: 'แก้ไขเรียบร้อย' });
             const formData = {
-                username: username.value,
-                firstname: firstname.value,
-                lastname: lastname.value,
+                userId: userId.value,
+                displayName: displayName.value,
+                statusMessage: statusMessage.value,
                 gender: gender.value,
                 showdate: showdate.value,
                 telnum: telnum.value,
@@ -220,9 +245,9 @@ import { color } from 'echarts'
             }
 
         // อัปเดต localStorage ทันที
-        localStorage.setItem('username', formData.username)
-        localStorage.setItem('firstname', formData.firstname)
-        localStorage.setItem('lastname', formData.lastname)
+        localStorage.setItem('userId', formData.userId)
+        localStorage.setItem('displayName', formData.displayName)
+        localStorage.setItem('statusMessage', formData.statusMessage)
         localStorage.setItem('gender', formData.gender)
         localStorage.setItem('showdate', formData.showdate)
         localStorage.setItem('telnum', formData.telnum)})
@@ -241,31 +266,35 @@ import { color } from 'echarts'
             message: 'Are you sure you want to logout?', 
         })
         .then(() => {
-            router.push('/') 
-            console.log('user logged out')
+            liff.logout()
+            liff.login()
+            // window.location.reload()
+            // router.push('/') 
+            // console.log('user logged out')
         })
-        .catch(() => {
+        .catch((error) => {
+            console.error('LIFF logout failed', error);
             console.log('user cancel logout')
         })
     }
 
     onMounted(() => {
 
-    // if (route.query.username){
-    //     localStorage.setItem('username', route.query.username as string)
+    // if (route.query.userId){
+    //     localStorage.setItem('userId', route.query.userId as string)
     //     localStorage.setItem('password', route.query.password as string)
-    //     localStorage.setItem('firstname', route.query.firstname as string)
-    //     localStorage.setItem('lastname', route.query.lastname as string)
+    //     localStorage.setItem('displayName', route.query.displayName as string)
+    //     localStorage.setItem('statusMessage', route.query.statusMessage as string)
     //     localStorage.setItem('showdate', route.query.showdate as string)
     //     localStorage.setItem('gender', route.query.gender as string)
     //     localStorage.setItem('telnum', route.query.telnum as string)
     // }
 
     // ดึงจาก localStorage มาแสดง
-        username.value = localStorage.getItem('username') || ''
+        userId.value = localStorage.getItem('userId') || ''
         password.value = localStorage.getItem('password') || ''
-        firstname.value = localStorage.getItem('firstname') || ''
-        lastname.value = localStorage.getItem('lastname') || ''
+        displayName.value = localStorage.getItem('displayName') || ''
+        statusMessage.value = localStorage.getItem('statusMessage') || ''
         showdate.value = localStorage.getItem('showdate') || ''
         gender.value = localStorage.getItem('gender') || ''
         telnum.value = localStorage.getItem('telnum') || ''

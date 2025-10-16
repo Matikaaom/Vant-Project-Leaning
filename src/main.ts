@@ -7,11 +7,7 @@ import thTH from './locale/lang/th-TH'
 // import enEN from 'vant/es/locale/lang/en-US'
 import { Locale } from 'vant';
 import '@vant/touch-emulator';
-import liff from "@line/liff";
 
-liff.init({
-  liffId: "2008284940-aZ5dYpXy"
-});
 
 const app = createApp(App)
 Locale.use('th-TH', thTH)

@@ -11,7 +11,7 @@
       >
         <template #left>
           <!-- ปุ่ม burger -->
-          <div class="burger-btn" v-if="isLargeScreen && showSidebarOrTabbar" @click="toggleSidebar" >
+          <div class="burger-btn" v-if="isLargeScreen" @click="toggleSidebar" >
             <van-icon color="#FE26C7" name="wap-nav" />
           </div>
         </template>
@@ -25,14 +25,14 @@
     </div>
 
     <!-- Desktop layout -->
-    <div v-if="isLargeScreen && showSidebarOrTabbar" class="layout">
+    <div v-if="isLargeScreen " class="layout">
       <!-- Sidebar -->
       <transition name="slide">
         <div v-show="isSidebarOpen" class="sidebar">
           <van-sidebar v-model="active" :style="{ '--van-sidebar-width': '300px', '--van-sidebar-selected-border-color': '#FE26C7', '--van-sidebar-selected-border-height': '60px' }">
             <van-sidebar-item
               title="Home"
-              to="/home"
+              to="/"
               :style="{ backgroundColor: '#FFCFF2', color: '#FE26C7' }"
             />
             <van-sidebar-item
@@ -70,14 +70,14 @@
 
     <!-- Mobile Tabbar -->
     <van-tabbar 
-      v-if="!isLargeScreen && showSidebarOrTabbar"
+      v-if="!isLargeScreen "
       v-model="active"  
       :style="{ backgroundColor: '#FFCFF2' }"
       active-color="#FE26C7"
       inactive-color="#FE47D0"
       route
     >
-      <van-tabbar-item to="/home" name="home" icon="home-o">Home</van-tabbar-item>
+      <van-tabbar-item to="/" name="home" icon="home-o">Home</van-tabbar-item>
       <van-tabbar-item to="/steps" name="steps" icon="todo-list-o">Progress Steps</van-tabbar-item>
       <van-tabbar-item to="/dashboard" name="dashboard" icon="chart-trending-o">Dashboard</van-tabbar-item>
       <van-tabbar-item to="/user" name="user" icon="user-o" badge="2">User Details</van-tabbar-item>
@@ -87,9 +87,34 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useWindowSize } from '@vueuse/core'
+import liff from '@line/liff';
+
+const LIFF_ID = "2008284940-aZ5dYpXy";
+onMounted(async () => {
+  try {
+    await liff.init({ liffId: LIFF_ID });
+    const profile = await liff.getProfile();
+    console.log(profile)
+  } catch (error) {
+    console.log('error', error);
+    console.error('LIFF initialization failed', error);
+  }
+});
+
+// const main = async () => {
+ 
+//   if (!liff.isLoggedIn()) {
+//     // ถ้ายังไม่ล็อกอิน ให้ login
+//     liff.login();
+//   } else {
+//     // ถ้าล็อกอินแล้ว ไปหน้า Home เลย
+//     router.push({ name: 'home' });
+//   }
+// }
+// main();
 
 
 const router = useRouter()
@@ -109,7 +134,7 @@ const isLargeScreen = computed(() => width.value > 768)
 
 // ตรวจสอบ path ปัจจุบัน 
 const route = useRoute()
-const showSidebarOrTabbar = computed(() => route.path !== '/')
+// const showSidebarOrTabbar = computed(() => route.path !== '/')
 
 </script>
 
