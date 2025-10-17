@@ -69,7 +69,7 @@ router.beforeEach(async (to, from, next) => {
 
     // ✅ ถ้าอยู่ใน LINE app แต่ยังไม่ได้ login
     if (!liff.isLoggedIn()) {
-    liff.login({ redirectUri: window.location.href })
+      liff.login({ redirectUri: window.location.origin + '/' })
     return
   }
 
