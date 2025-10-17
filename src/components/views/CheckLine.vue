@@ -31,19 +31,8 @@ onMounted(async () => {
     }
     isInClient.value=liff.isInClient()
     // ถ้าไม่ใช่ LINE client ให้แสดงหน้าบอกให้เปิดในแอป LINE
-    if (!liff.isInClient()) {
+    if (!liff.isInClient() && !liff.isLoggedIn()) {
       isInLine.value = false
-      loading.value = false
-      return
-    }
-
-    // ถ้าอยู่ใน LINE client แต่ยังไม่ได้ login และไม่มี code ให้เรียก login (redirect กลับไป root)
-    if (!liff.isLoggedIn()) {
-      if (!hasCode) {
-        liff.login({ redirectUri: window.location.origin + '/' })
-        return
-      }
-      // ถ้ามี code อยู่ ให้รอให้ LIFF SDK ประมวลผล (อย่าเรียก login ซ้ำ)
       loading.value = false
       return
     }
@@ -52,6 +41,7 @@ onMounted(async () => {
     const profile = await liff.getProfile()
     console.log('LINE Profile:', profile)
     router.replace({ name: 'home' })
+    loading.value = false
   } catch (error) {
     console.error('เกิดข้อผิดพลาดตอน init LIFF:', error)
     isInLine.value = false
