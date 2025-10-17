@@ -17,9 +17,6 @@
       </van-button>
     </van-row>
   </div>
-  <div v-else-if="loading" class="text-center mt-20">
-    <p>กำลังตรวจสอบข้อมูลจาก LINE...</p>
-  </div>
 </template>
 
 <script setup>
