@@ -11,7 +11,8 @@
     <van-row justify="center">
       <van-button
         @click="handleLogin"
-        color="#FF5BC6" size="normal" 
+        color="#FF5BC6"
+        size="normal"
       >
         LOGIN LINE
       </van-button>
@@ -25,9 +26,15 @@ import liff from '@line/liff'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const LIFF_ID = '2008284940-aZ5dYpXy' 
+const LIFF_ID = '2008284940-aZ5dYpXy'
 const isInLine = ref(true)
 const loading = ref(true)
+
+// ✅ ตั้ง redirectUri ให้ตรงกับ environment
+const isLocal = location.hostname === 'localhost'
+const redirectUri = isLocal
+  ? 'http://localhost:5173' // สำหรับตอนรัน dev
+  : 'https://vant-project-leaning.vercel.app' // สำหรับ deploy จริง
 
 onMounted(async () => {
   try {
@@ -35,21 +42,19 @@ onMounted(async () => {
 
     if (!liff.isInClient()) {
       isInLine.value = false
-      loading.value = false
       return
     }
 
     if (!liff.isLoggedIn()) {
-      loading.value = false
       return
     }
 
     const profile = await liff.getProfile()
     console.log('LINE Profile:', profile)
 
-    router.push({name:'home'}) 
+    router.push({ name: 'home' })
   } catch (error) {
-    console.error('เกิดข้อผิดพลาดตอน init LIFF:', error)
+    console.error('❌ เกิดข้อผิดพลาดตอน init LIFF:', error)
     isInLine.value = false
   } finally {
     loading.value = false
@@ -58,7 +63,7 @@ onMounted(async () => {
 
 function handleLogin() {
   try {
-    liff.login()
+    liff.login({ redirectUri })
   } catch (err) {
     console.error('Login error:', err)
   }
