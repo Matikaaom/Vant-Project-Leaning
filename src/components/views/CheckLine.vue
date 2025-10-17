@@ -3,6 +3,7 @@
     <img src="@/assets/StarCatLOGO.png" alt="Logo" class="w-24 h-24 mb-4" />
     <h1 class="text-xl font-semibold mb-2">กรุณาเปิดผ่าน LINE OA</h1>
     <p class="text-gray-500 mb-4">หรือ ล็อกอินด้วย LINE ที่ปุ่มด้านล่าง</p>
+     <p class="text-gray-500 mb-4">{{ isInClient? "มาจากไลน์": "ไม่ได้มาจากไลน์" }}</p>
     <van-row justify="center">
       <van-button @click="handleLogin" color="#FF5BC6" size="normal">LOGIN LINE</van-button>
     </van-row>
@@ -18,6 +19,7 @@ const router = useRouter()
 const LIFF_ID = '2008284940-aZ5dYpXy'
 const isInLine = ref(true)
 const loading = ref(true)
+const isInClient = ref(false)
 
 onMounted(async () => {
   try {
@@ -27,7 +29,7 @@ onMounted(async () => {
     if (hasCode) {
       window.history.replaceState({}, document.title, window.location.pathname)
     }
-
+    isInClient.value=liff.isInClient()
     // ถ้าไม่ใช่ LINE client ให้แสดงหน้าบอกให้เปิดในแอป LINE
     if (!liff.isInClient()) {
       isInLine.value = false

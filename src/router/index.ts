@@ -43,7 +43,6 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
- if (to.path === '/line') return next()
   
   next()
 })
