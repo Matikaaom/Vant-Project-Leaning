@@ -8,25 +8,29 @@ import { Locale } from 'vant';
 import '@vant/touch-emulator';
 import liff from '@line/liff'
 
-const LIFF_ID = '2008284940-aZ5dYpXy' // ใส่ LIFF ID จริง
+  const app = createApp(App)
+  Locale.use('th-TH', thTH)
+  app.use(router)
+  app.mount('#app')
+  
 
-// ครอบ if...else ง่าย ๆ
-async function bootstrap() {
-  await liff.init({ liffId: LIFF_ID })
+// const LIFF_ID = '2008284940-aZ5dYpXy' // ใส่ LIFF ID จริง
 
-  if (!liff.isLoggedIn()) {
-    // ยังไม่ login → redirect ไป LINE login
-    liff.login()
-  } else {
-    // login แล้ว → mount Vue app
-    const app = createApp(App)
-    Locale.use('th-TH', thTH)
-    app.use(router)
-    app.mount('#app')
-  }
-}
+// async function bootstrap() {
+//   await liff.init({ liffId: LIFF_ID })
 
-bootstrap()
+//   if (!liff.isLoggedIn()) {
+//     liff.login()
+//   } else {
+
+//     const app = createApp(App)
+//     Locale.use('th-TH', thTH)
+//     app.use(router)
+//     app.mount('#app')
+//   }
+// }
+
+// bootstrap()
 
 // import { createApp } from 'vue'
 // import App from './App.vue'
