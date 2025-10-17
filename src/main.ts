@@ -16,17 +16,16 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import './assets/main.css'
-import 'vant/lib/index.css'
+import liff from '@line/liff'
 import thTH from './locale/lang/th-TH'
 import { Locale } from 'vant'
 import '@vant/touch-emulator'
-import liff from '@line/liff'
+import './assets/main.css'
+import 'vant/lib/index.css'
 
 const LIFF_ID = '2008284940-aZ5dYpXy'
 
 async function bootstrap() {
-  // สร้างและ mount app ก่อน เพื่อให้ router ใช้งานได้ทันที
   const app = createApp(App)
   Locale.use('th-TH', thTH)
   app.use(router)
@@ -36,41 +35,55 @@ async function bootstrap() {
     await liff.init({ liffId: LIFF_ID })
     console.log('✅ LIFF initialized')
 
-    // เคลียร์ query ?code=... และพารามิเตอร์อื่นที่ LIFF ส่งมา (จะไม่ reload หน้า)
-    if (window.location.search.includes('code=')) {
+    // ถ้ามี code ใน URL แปลว่ากำลังถูก redirect มาจาก LINE OAuth
+    const hasCode = window.location.search.includes('code=')
+
+    // เคลียร์ query เพื่อไม่ให้วนซ้ำ (แต่ยังเก็บ hasCode ไว้ใช้ตัดสินใจ)
+    if (hasCode) {
       window.history.replaceState({}, document.title, window.location.pathname)
     }
 
-    // ถ้าไม่ได้เปิดใน LINE client → ให้ไปหน้า /line (แจ้งให้เปิดในแอป LINE)
+    // ถ้าไม่ได้เปิดจาก LINE client → ไป /line เพื่อแสดงหน้าบอกให้เปิดผ่านแอป LINE
     if (!liff.isInClient()) {
-      // ถ้ต้องการให้แสดงหน้า /line ให้ใช้ router.push
       router.replace('/line')
       return
     }
 
-    // ถ้ายังไม่ได้ login → เรียก login และใช้ redirectUri ชัดเจนกลับมาที่ root (home)
+    // ถ้ายังไม่ login
     if (!liff.isLoggedIn()) {
-      liff.login({ redirectUri: window.location.origin + '/' })
-      return
+      // ถ้าเพิ่งถูก redirect กลับมาจาก LINE (hasCode === true) อย่าเรียก login ซ้ำ
+      if (!hasCode) {
+        liff.login({ redirectUri: window.location.origin + '/' })
+        return
+      }
+      // ถ้ามี hasCode แต่ liff.isLoggedIn() ยัง false รอให้ LIFF SDK ประมวลผลต่อ (อย่าเรียก login)
     }
 
-    // ถ้า login แล้ว ให้ดึง profile และถ้าจำเป็นให้ redirect ไปหน้า home (root)
-    const profile = await liff.getProfile()
-    console.log('👤 LINE profile:', profile)
-
-    // ถ้า URL ปัจจุบันเป็น /line ให้กลับไปหน้า root (home)
-    if (window.location.pathname === '/line' || window.location.pathname === '/login') {
-      router.replace('/')
+    // ถ้าเข้ามาถึงตรงนี้และ login แล้ว → ดึง profile แล้ว redirect จาก /line ไป /
+    if (liff.isLoggedIn()) {
+      const profile = await liff.getProfile()
+      console.log('👤 LINE profile:', profile)
+      if (window.location.pathname === '/line') {
+        router.replace('/')
+      }
     }
-
-  } catch (error) {
-    console.error('❌ LIFF init failed:', error)
-    // ถ้า init ล้มเหลว ให้ไปหน้า /line เพื่อแจ้งผู้ใช้
+  } catch (err) {
+    console.error('❌ LIFF init error:', err)
     router.replace('/line')
   }
 }
 
-bootstrap()  
+// ป้องกันกรณี bfcache (back/forward cache) ที่คืนสถานะหน้าเก่าโดยไม่ reload
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) {
+    // เมื่อเข้ามาจาก bfcache ให้รัน bootstrap อีกครั้งเพื่อรีเช็ค state
+    bootstrap().catch(e => console.error(e))
+  }
+})
+
+// เรียกครั้งแรก
+bootstrap().catch(e => console.error(e))
+
 
 // const LIFF_ID = '2008284940-aZ5dYpXy' // ใส่ LIFF ID จริง
 
