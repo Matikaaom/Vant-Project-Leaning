@@ -1,7 +1,7 @@
 <template>
   <div v-if="!isInLine" class="flex flex-col items-center justify-center text-center p-6 mt-20">
     <img src="@/assets/StarCatLOGO.png" alt="Logo" class="w-24 h-24 mb-4" />
-    <h1 class="text-xl font-semibold mb-2">กรุณาเปิดผ่านแอป LINE</h1>
+    <h1 class="text-xl font-semibold mb-2">กรุณาเปิดผ่าน LINE OA</h1>
     <p class="text-gray-500 mb-4">หรือ ล็อกอินด้วย LINE ที่ปุ่มด้านล่าง</p>
     <van-row justify="center">
       <van-button @click="handleLogin" color="#FF5BC6" size="normal">LOGIN LINE</van-button>
