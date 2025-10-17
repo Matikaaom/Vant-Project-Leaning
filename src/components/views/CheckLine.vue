@@ -50,7 +50,7 @@ onMounted(async () => {
     const profile = await liff.getProfile()
     console.log('LINE Profile:', profile)
 
-    router.push('/') 
+    router.push({name:'home'}) 
   } catch (error) {
     console.error('เกิดข้อผิดพลาดตอน init LIFF:', error)
     isInLine.value = false
