@@ -123,26 +123,6 @@
     import { showConfirmDialog, showNotify } from 'vant'
     import { useRoute, useRouter } from 'vue-router'
     import liff from '@line/liff'
-    import { color } from 'echarts'
-    import { StorageSerializers, useStorage } from "@vueuse/core"
-    
-    const profileUser = useStorage("profileUser", null, undefined, { serializer: StorageSerializers.object })
-    
-    onMounted(async () => {
-
-        const profile = await liff.getProfile()
-        console.log('LINE profile', profile)
-
-        profileUser.value = {
-            userId: profile.userId,
-            displayName: profile.displayName,
-            pictureUrl: profile.pictureUrl,
-            statusMessage: profile.statusMessage,
-        }
-        userId.value = profile.userId
-        displayName.value = profile.displayName
-        statusMessage.value = profile.statusMessage
-        })
 
     const router = useRouter()
 
