@@ -80,17 +80,6 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-
-const router = useRouter()
-
-onMounted(() => {
-  const profileUser = localStorage.getItem('profileUser')
-  if (!profileUser) {
-    router.replace('/line') // ถ้ายังไม่มี login → ไปหน้า /line
-  }
-})
 
 </script>
 
