@@ -6,7 +6,7 @@
     left-icon="volume-o"
   />
 
-  <!-- 🟢 แสดงรูปโปรไฟล์จาก LINE (ถ้ามี) -->
+  <!-- แสดงรูปโปรไฟล์จาก LINE -->
   <img
     id="pictureUrl"
     v-if="profileUser && profileUser.pictureUrl"
@@ -134,10 +134,10 @@ import { showConfirmDialog, showNotify } from 'vant'
 import { useRoute, useRouter } from 'vue-router'
 import liff from '@line/liff'
 
-// 🟢 เพิ่ม: ดึงข้อมูลจาก useStorage (profileUser)
+// ดึงข้อมูลจาก useStorage (profileUser)
 import { useStorage, StorageSerializers } from '@vueuse/core'
 
-// 🟢 เพิ่ม: ใช้ useStorage เพื่อเก็บ/อ่าน LINE profile ที่ login ไว้ก่อนหน้า
+// ใช้ useStorage เพื่อเก็บ/อ่าน LINE profile ที่ login ไว้ก่อนหน้า
 const profileUser = useStorage('profileUser', null, undefined, {
   serializer: StorageSerializers.object
 })
@@ -227,14 +227,14 @@ const logout = () => {
 }
 
 onMounted(() => {
-  // 🟢 ถ้ามีข้อมูลจาก profileUser (มาจากหน้า login) ให้ดึงมาแสดงก่อน
+  // ถ้ามีข้อมูลจาก profileUser (มาจากหน้า login) ให้ดึงมาแสดงก่อน
   if (profileUser.value) {
     userId.value = profileUser.value.userId || ''
     displayName.value = profileUser.value.displayName || ''
     statusMessage.value = profileUser.value.statusMessage || ''
   }
 
-  // 🟣 ของเดิม: ดึงจาก localStorage เผื่อผู้ใช้เคยกรอกเอง
+  // ดึงจาก localStorage เผื่อผู้ใช้เคยกรอกเอง
   userId.value = localStorage.getItem('userId') || userId.value
   password.value = localStorage.getItem('password') || ''
   displayName.value = localStorage.getItem('displayName') || displayName.value

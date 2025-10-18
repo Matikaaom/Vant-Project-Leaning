@@ -11,12 +11,12 @@
 </template>
 
 <script setup>
-// 🟣 ใช้ของเดิมทั้งหมด
+
 import { ref, onMounted } from 'vue'
 import liff from '@line/liff'
 import { useRouter } from 'vue-router'
 
-// 🟢 เพิ่ม import สำหรับ useStorage (จาก VueUse)
+// เพิ่ม import สำหรับ useStorage (จาก VueUse)
 import { useStorage, StorageSerializers } from '@vueuse/core'
 
 const router = useRouter()
@@ -26,12 +26,12 @@ const isInLine = ref(true)
 const loading = ref(true)
 const isInClient = ref(false)
 
-// 🟢 เพิ่มส่วนเก็บข้อมูลผู้ใช้แบบถาวร (localStorage)
+// เพิ่มส่วนเก็บข้อมูลผู้ใช้แบบถาวร (localStorage)
 const profileUser = useStorage('profileUser', null, undefined, {
   serializer: StorageSerializers.object
 })
 
-// 🟢 เพิ่มตัวแปร reactive สำหรับผูกกับ template (ถ้ามีการแสดง)
+// เพิ่มตัวแปร reactive สำหรับผูกกับ template (ถ้ามีการแสดง)
 const userId = ref('')
 const displayName = ref('')
 const statusMessage = ref('')
@@ -53,11 +53,11 @@ onMounted(async () => {
       return
     }
 
-    // 🟢 ดึงโปรไฟล์ผู้ใช้จาก LINE
+    // ดึงโปรไฟล์ผู้ใช้จาก LINE
     const profile = await liff.getProfile()
     console.log('LINE Profile:', profile)
 
-    // 🟢 เก็บข้อมูลโปรไฟล์ลง localStorage
+    // เก็บข้อมูลโปรไฟล์ลง localStorage
     profileUser.value = {
       userId: profile.userId,
       displayName: profile.displayName,
@@ -65,13 +65,13 @@ onMounted(async () => {
       statusMessage: profile.statusMessage,
     }
 
-    // 🟢 เก็บข้อมูลลงตัวแปร reactive สำหรับแสดงในหน้า
+    // เก็บข้อมูลลงตัวแปร reactive สำหรับแสดงในหน้า
     userId.value = profile.userId
     displayName.value = profile.displayName
     statusMessage.value = profile.statusMessage
     pictureUrl.value = profile.pictureUrl
 
-    // 🟣 ของเดิม: ไปหน้า home
+    // ไปหน้า home
     router.replace({ name: 'home' })
     loading.value = false
   } catch (error) {
@@ -82,7 +82,6 @@ onMounted(async () => {
   }
 })
 
-// 🟣 ของเดิม
 function handleLogin() {
   try {
     liff.login({ redirectUri: window.location.origin + '/' })
