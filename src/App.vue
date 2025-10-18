@@ -90,39 +90,6 @@ import liff from '@line/liff';
 const router = useRouter()
 const LIFF_ID = "2008284940-aZ5dYpXy"
 
-// onMounted(async () => {
-//   try {
-//     await liff.init({ liffId: LIFF_ID })
-    
-//     if (!liff.isInClient()) {
-//       // ถ้าไม่ได้เปิดจาก LINE LIFF → redirect /mobile
-//       if (router.currentRoute.value.path !== '/mobile') {
-//         router.replace('/mobile')
-//       }
-//       return
-//     }
-
-//     // ถ้าอยู่ใน LINE LIFF → ดึง profile ปกติ
-//     const profile = await liff.getProfile()
-//     console.log(profile)
-//   } catch (error) {
-//     console.error('LIFF initialization failed', error)
-//     // กรณี error ลอง redirect ไปหน้า login ปกติ
-//   }
-// })
-
-// const LIFF_ID = "2008284940-aZ5dYpXy";
-
-// onBeforeMount(async () => {
-//     await liff.init({ liffId: LIFF_ID });
-
-//     if (!liff.isLoggedIn()) {
-//       // บังคับให้ user login
-//       liff.login();
-//       return; // stop ต่อไม่ให้โหลดเนื้อหา
-//     }
-// });
-
 onMounted(async () => {
   try {
     await liff.init({ liffId: LIFF_ID });
@@ -135,23 +102,6 @@ onMounted(async () => {
   }
   
 });
-
-// onBeforeMount(async () => {
-//   await liff.init({ liffId: LIFF_ID })
-
-//   if (!liff.isLoggedIn()) {
-//     await liff.login()
-//     return
-//   }
-
-//   // ถ้าล็อกอินแล้ว ค่อยไปดึง profile
-//   try {
-//     const profile = await liff.getProfile()
-//     console.log('LINE Profile:', profile)
-//   } catch (error) {
-//     console.error('Error getting profile:', error)
-//   }
-// })
 
 const active = ref('home')
 const isSidebarOpen = ref(false)
