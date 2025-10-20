@@ -226,29 +226,6 @@ const logout = () => {
     })
 }
 
-// const logout = async () => {
-//   try {
-//     await showConfirmDialog({
-//       title: 'LOGOUT',
-//       message: 'Are you sure you want to logout?',
-//     })
-
-//     await liff.init({ liffId: '2008284940-aZ5dYpXy' })
-
-//     if (!liff.isLoggedIn()) {
-//       console.log('User not logged in, redirect to login...')
-//       liff.login()
-//       return
-//     }
-
-//     liff.logout()
-//     localStorage.removeItem('profileUser')
-//     window.location.reload()
-//   } catch (error) {
-//     console.error('LIFF logout failed:', error)
-//   }
-// }
-
 onMounted(() => {
   // ถ้ามีข้อมูลจาก profileUser (มาจากหน้า login) ให้ดึงมาแสดงก่อน
   if (profileUser.value) {
