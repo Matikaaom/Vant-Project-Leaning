@@ -5,13 +5,13 @@ import PasswordPage from '@/components/views/PasswordPage.vue'
 import StepsPage from '@/components/views/StepsPage.vue'
 import DashboardPage from '@/components/views/DashboardPage.vue'
 import UserPage from '@/components/views/UserPage.vue'
-import Checkline from '@/components/views/CheckLine.vue'
+import CheckLine from '@/components/views/CheckLine.vue'
 
 const routes = [
   // { path: '/', component: AppLayout },
   { path: '/', name: 'home', component: HomePage },
   { path: '/password', name: 'password', component: PasswordPage},
-  { path: '/line', name: 'line', component: Checkline} ,
+  { path: '/line', name: 'line', component: CheckLine} ,
   { path: '/steps', name: 'steps', component: StepsPage },
   { path: '/dashboard', name: 'dashboard', component: DashboardPage },
   { path: '/user', name: 'user', component: UserPage }
