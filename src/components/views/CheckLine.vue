@@ -70,7 +70,7 @@ onMounted(async () => {
     pictureUrl.value = profile.pictureUrl
 
     // ไปหน้า home
-    router.replace({ name: 'Checkline' })
+    // router.replace({ name: 'home' })
     loading.value = false
   } catch (error) {
     console.error('เกิดข้อผิดพลาดตอน init LIFF:', error)
