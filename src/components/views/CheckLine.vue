@@ -82,7 +82,7 @@ onMounted(async () => {
 
 function handleLogin() {
   try {
-    liff.login({ redirectUri: window.location.origin + '/' })
+    liff.login({ redirectUri: window.location.origin + '/line' })
   } catch (err) {
     console.error('Login error:', err)
   }
