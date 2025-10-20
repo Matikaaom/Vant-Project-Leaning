@@ -15,8 +15,6 @@
 import { ref, onMounted } from 'vue'
 import liff from '@line/liff'
 import { useRouter } from 'vue-router'
-
-// เพิ่ม import สำหรับ useStorage (จาก VueUse)
 import { useStorage, StorageSerializers } from '@vueuse/core'
 
 const router = useRouter()
