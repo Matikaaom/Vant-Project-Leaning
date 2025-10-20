@@ -38,10 +38,9 @@ const pictureUrl = ref('')
 onMounted(async () => {
   try {
     await liff.init({ liffId: LIFF_ID })
-    const hasCode = window.location.search.includes('code=')
-    if (hasCode) {
-      window.history.replaceState({}, document.title, window.location.pathname)
-    }
+
+    const urlParams = new URLSearchParams(window.location.search)
+    const loginSuccess = urlParams.get('login') === 'true' // ใช้ query ?login=true
 
     isInClient.value = liff.isInClient()
 
@@ -51,11 +50,7 @@ onMounted(async () => {
       return
     }
 
-    // ดึงโปรไฟล์ผู้ใช้จาก LINE
     const profile = await liff.getProfile()
-    console.log('LINE Profile:', profile)
-
-    // เก็บข้อมูลโปรไฟล์ลง localStorage
     profileUser.value = {
       userId: profile.userId,
       displayName: profile.displayName,
@@ -63,15 +58,15 @@ onMounted(async () => {
       statusMessage: profile.statusMessage,
     }
 
-    // เก็บข้อมูลลงตัวแปร reactive สำหรับแสดงในหน้า
     userId.value = profile.userId
     displayName.value = profile.displayName
     statusMessage.value = profile.statusMessage
     pictureUrl.value = profile.pictureUrl
 
-    // ไปหน้า home
-    router.replace({ name: 'home' })
-    loading.value = false
+    if (loginSuccess) {
+      router.replace({ name: 'home' }) // redirect **เฉพาะหลัง login ใหม่**
+    }
+
   } catch (error) {
     console.error('เกิดข้อผิดพลาดตอน init LIFF:', error)
     isInLine.value = false
@@ -79,6 +74,7 @@ onMounted(async () => {
     loading.value = false
   }
 })
+
 
 function handleLogin() {
   try {
