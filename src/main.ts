@@ -6,6 +6,7 @@ import { Locale } from 'vant'
 import '@vant/touch-emulator'
 import './assets/main.css'
 import 'vant/lib/index.css'
+import liff from '@line/liff'
 
   const app = createApp(App)
   Locale.use('th-TH', thTH)
